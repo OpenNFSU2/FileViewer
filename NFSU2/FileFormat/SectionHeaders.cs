@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace NFSU2.FileFormat
 {
-    enum SectionHeaders : uint
+    public enum SectionHeaders : uint
     {
         MeshPart = 0x80134010,
+        MeshData = 0x80134100,
 
         MeshInfo = 0x00134011,
         MeshDescription = 0x00134900,

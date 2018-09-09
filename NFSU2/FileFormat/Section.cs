@@ -10,7 +10,7 @@ using NFSU2.FileFormat.Sections;
 
 namespace NFSU2.FileFormat
 {
-    class Section : TreeNode, IByteProvider
+    public class Section : TreeNode, IByteProvider
     {
         public Stream Stream { get; private set; }
         public uint Header { get; private set; }
@@ -22,7 +22,6 @@ namespace NFSU2.FileFormat
         public bool HasSubSections { get; private set; }
 
         long IByteProvider.Length => Length;
-        //public override string Text => Header.ToString("X8") + " (" + Length + " bytes)";
 
         public long Position { get; private set; }
         private BinaryReader _reader;
@@ -79,10 +78,29 @@ namespace NFSU2.FileFormat
                     var cl = Activator.CreateInstance(type);
                     if (cl is ISection sec)
                     {
-                        sec.Parse(_reader, Position+8);
+                        sec.Parse(this);
                         return sec;
                     }
                 }
+            }
+
+            return null;
+        }
+
+        public T Decode<T>() where T: ISection
+        {
+            var decoded = Decode();
+            if (decoded is T t) return t;
+            return default(T);
+        }
+
+        public Section GetSection(SectionHeaders header)
+        {
+            if (!HasSubSections) return null;
+
+            foreach (var section in SubSections)
+            {
+                if (section.Header == (uint)header) return section;
             }
 
             return null;

@@ -55,6 +55,10 @@
     <Compile Include="FileFormat\SectionHeaders.cs" />
     <Compile Include="FileFormat\Sections\ISection.cs" />
     <Compile Include="FileFormat\Sections\MeshDescription.cs" />
+    <Compile Include="FileFormat\Sections\MeshIndices.cs" />
+    <Compile Include="FileFormat\Sections\MeshInfo.cs" />
+    <Compile Include="FileFormat\Sections\MeshPart.cs" />
+    <Compile Include="FileFormat\Sections\MeshVertices.cs" />
     <Compile Include="FileFormat\Sections\SectionAttribute.cs" />
     <Compile Include="FileViewer.cs">
       <SubType>Form</SubType>

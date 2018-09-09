@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace NFSU2.FileFormat.Sections
 {
-    interface ISection
+    public interface ISection
     {
-        bool Parse(BinaryReader reader, long position);
+        bool Parse(Section section);
     }
 }
