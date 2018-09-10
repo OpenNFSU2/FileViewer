@@ -44,9 +44,13 @@ namespace NFSU2.FileFormat.Sections
         public bool Parse(Section section)
         {
             var reader = new BinaryReader(new MemoryStream(section.Data));
-            reader.BaseStream.Position = 116;
+            while (reader.ReadByte() == 0x11) { }
 
-            while (reader.BaseStream.Position < reader.BaseStream.Length)
+            reader.BaseStream.Position -= 1;
+
+            var desc = section.ParentSection.GetSection(SectionHeaders.MeshDescription).Decode<MeshDescription>();
+
+            while (Positions.Count < desc.VerticesCount)
             {
                 var posX = reader.ReadSingle();
                 var posY = reader.ReadSingle();
@@ -66,6 +70,8 @@ namespace NFSU2.FileFormat.Sections
                 TexCoordinates.Add(new Vector2f(texCoordX, texCoordY));
                 Unknown.Add(unknown);
             }
+
+            Console.WriteLine("End Position : " + reader.BaseStream.Position + " out of " + reader.BaseStream.Length);
 
             return true;
         }

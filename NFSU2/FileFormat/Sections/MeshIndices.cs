@@ -15,7 +15,8 @@ namespace NFSU2.FileFormat.Sections
         public bool Parse(Section section)
         {
             var reader = new BinaryReader(new MemoryStream(section.Data));
-            reader.BaseStream.Position = 12;
+            while (reader.ReadByte() == 0x11) { }
+            reader.BaseStream.Position -= 1;
 
             while (reader.BaseStream.Position < reader.BaseStream.Length)
             {

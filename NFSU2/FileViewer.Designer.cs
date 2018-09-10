@@ -38,6 +38,7 @@
             this.lblResult = new System.Windows.Forms.Label();
             this.btnMeshData = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
+            this.btnExportAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnOpenFile
@@ -153,11 +154,23 @@
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
+            // btnExportAll
+            // 
+            this.btnExportAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportAll.Location = new System.Drawing.Point(1383, 634);
+            this.btnExportAll.Name = "btnExportAll";
+            this.btnExportAll.Size = new System.Drawing.Size(168, 40);
+            this.btnExportAll.TabIndex = 10;
+            this.btnExportAll.Text = "Export all parts";
+            this.btnExportAll.UseVisualStyleBackColor = true;
+            this.btnExportAll.Click += new System.EventHandler(this.btnExportAll_Click);
+            // 
             // FileViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1563, 778);
+            this.Controls.Add(this.btnExportAll);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnMeshData);
             this.Controls.Add(this.lblResult);
@@ -187,6 +200,7 @@
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Button btnMeshData;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnExportAll;
     }
 }
 

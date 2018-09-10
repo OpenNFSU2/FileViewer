@@ -12,6 +12,8 @@ namespace NFSU2.FileFormat
 {
     public class Section : TreeNode, IByteProvider
     {
+        public Section ParentSection { get; }
+
         public Stream Stream { get; private set; }
         public uint Header { get; private set; }
         public int Length { get; private set; }
@@ -29,8 +31,9 @@ namespace NFSU2.FileFormat
         public event EventHandler LengthChanged;
         public event EventHandler Changed;
 
-        public Section(Stream stream, long position)
+        public Section(Stream stream, long position, Section parent = null)
         {
+            ParentSection = parent;
             Stream = stream;
             Position = position;
 
@@ -49,7 +52,7 @@ namespace NFSU2.FileFormat
                 var read = 0;
                 while (read < Length)
                 {
-                    var section = new Section(stream, Stream.Position);
+                    var section = new Section(stream, Stream.Position, this);
                     read += 4 + 4 + section.Length;
 
                     SubSections.Add(section);
@@ -104,6 +107,16 @@ namespace NFSU2.FileFormat
             }
 
             return null;
+        }
+
+        public IEnumerable<Section> GetSections(SectionHeaders header)
+        {
+            if (!HasSubSections) yield break;
+
+            foreach (var section in SubSections)
+            {
+                if (section.Header == (uint) header) yield return section;
+            }
         }
 
         public sealed override string ToString()
