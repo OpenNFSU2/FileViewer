@@ -44,7 +44,7 @@ namespace NFSU2.FileFormat
             Length = _reader.ReadInt32();
 
             var headerBytes = BitConverter.GetBytes(Header);
-            if (headerBytes[3] == 0x80)
+            if ((headerBytes[3] & (1 << 7)) != 0)
             {
                 HasSubSections = true;
                 SubSections = new List<Section>();
