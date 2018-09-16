@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NFSU2.FileFormat;
 using NFSU2.FileFormat.Sections;
+using NFSU2.FileFormat.Sections.Geometry;
+using NFSU2.FileFormat.Sections.Textures;
 
 namespace NFSU2
 {
@@ -34,6 +36,19 @@ namespace NFSU2
                 var file = File.Open(dialog.FileName, FileMode.Open, FileAccess.Read);
 
                 _mainSection = new Section(file, 0);
+
+                if (_mainSection.Header == (uint) SectionHeaders.TextureArchive)
+                {
+                    var textureArchive = _mainSection.Decode<TextureArchive>();
+                    Console.WriteLine(textureArchive.Details.FileName);
+                    Console.WriteLine(textureArchive.Details.SourceName);
+                    Console.WriteLine(textureArchive.List.Files.Count);
+
+                    foreach (var f in textureArchive.List.Files)
+                    {
+                        textureArchive.GetFile(f);
+                    }
+                }
 
                 tvFileStructure.Nodes.Add(_mainSection);
             }

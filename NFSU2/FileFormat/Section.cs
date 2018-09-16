@@ -62,9 +62,10 @@ namespace NFSU2.FileFormat
             else
             {
                 HasSubSections = false;
-                Data = _reader.ReadBytes(Length);
             }
 
+            Stream.Position = position + 8;
+            Data = _reader.ReadBytes(Length);
             Text = ToString();
         }
 

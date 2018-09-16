@@ -51,15 +51,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compression\HUFFCompression.cs" />
+    <Compile Include="Compression\ICompression.cs" />
+    <Compile Include="Compression\JDLZCompression.cs" />
+    <Compile Include="Compression\UnknownCompressionMethod.cs" />
     <Compile Include="FileFormat\Section.cs" />
     <Compile Include="FileFormat\SectionHeaders.cs" />
     <Compile Include="FileFormat\Sections\ISection.cs" />
-    <Compile Include="FileFormat\Sections\MeshDescription.cs" />
-    <Compile Include="FileFormat\Sections\MeshIndices.cs" />
-    <Compile Include="FileFormat\Sections\MeshInfo.cs" />
-    <Compile Include="FileFormat\Sections\MeshPart.cs" />
-    <Compile Include="FileFormat\Sections\MeshVertices.cs" />
+    <Compile Include="FileFormat\Sections\Geometry\MeshDescription.cs" />
+    <Compile Include="FileFormat\Sections\Geometry\MeshIndices.cs" />
+    <Compile Include="FileFormat\Sections\Geometry\MeshInfo.cs" />
+    <Compile Include="FileFormat\Sections\Geometry\MeshPart.cs" />
+    <Compile Include="FileFormat\Sections\Geometry\MeshVertices.cs" />
     <Compile Include="FileFormat\Sections\SectionAttribute.cs" />
+    <Compile Include="FileFormat\Sections\Textures\ArchiveDetails.cs" />
+    <Compile Include="FileFormat\Sections\Textures\FileDictionary.cs" />
+    <Compile Include="FileFormat\Sections\Textures\FileList.cs" />
+    <Compile Include="FileFormat\Sections\Textures\TextureArchive.cs" />
     <Compile Include="FileViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +82,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\BinaryReaderExtensions.cs" />
     <EmbeddedResource Include="FileViewer.resx">
       <DependentUpon>FileViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,5 +113,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

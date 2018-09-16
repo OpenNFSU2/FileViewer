@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NFSU2.FileFormat.Sections
+namespace NFSU2.FileFormat.Sections.Geometry
 {
     [Section(Header = SectionHeaders.MeshVertices)]
     public class MeshVertices : ISection

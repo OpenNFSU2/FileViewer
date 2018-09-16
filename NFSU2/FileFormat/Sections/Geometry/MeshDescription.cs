@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
-namespace NFSU2.FileFormat.Sections
+namespace NFSU2.FileFormat.Sections.Geometry
 {
     [Section(Header = SectionHeaders.MeshDescription)]
     public class MeshDescription : ISection
