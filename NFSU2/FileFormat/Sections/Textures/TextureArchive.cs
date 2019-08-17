@@ -34,12 +34,13 @@ namespace NFSU2.FileFormat.Sections.Textures
         public byte[] GetFile(int fileHash)
         {
             var lookup = LookupTable.Files.First(f => f.Hash == fileHash);
+            Console.WriteLine(fileHash.ToString("X4") + "@" + lookup.Offset.ToString("X4"));
 
             // we have to subtract 8 bytes here because the initial file header is not included in data
             var header = new[]
                 {_data[lookup.Offset - 8], _data[lookup.Offset - 7], _data[lookup.Offset - 6], _data[lookup.Offset - 5]};
 
-            Console.WriteLine("Header: " + (char)header[0] + (char)header[1] + (char)header[2] + (char)header[3]);
+            //Console.WriteLine("Header: " + (char)header[0] + (char)header[1] + (char)header[2] + (char)header[3]);
 
             var compression = GetCompressionMethod(header);
             if (compression == null)
@@ -53,7 +54,11 @@ namespace NFSU2.FileFormat.Sections.Textures
                 input[i - lookup.Offset] = _data[i - 8];
             }
 
-            return compression.Decompress(input);
+            var decompressed = compression.Decompress(input);
+
+            //Console.WriteLine($"Compressed size: {lookup.CompressedLength}  Decompressed size: {decompressed.Length} (expected {lookup.DecompressedLength})");
+
+            return decompressed;
         }
 
         private ICompression GetCompressionMethod(byte[] header)
